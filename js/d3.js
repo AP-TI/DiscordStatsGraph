@@ -2,7 +2,7 @@ d3.json("https://apti.be/discord/api")
   .then(data => {
     //data.forEach(d => d.aantal.numberInt = +d.aantal.numberInt);
     const firstField = data[0];
-    const height = firstField.aantal * 10;
+    const height = firstField.aantal * 25;
     const multi = 4;
 
     const svg = d3
