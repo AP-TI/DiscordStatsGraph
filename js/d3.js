@@ -8,9 +8,9 @@ d3.json("https://apti.be/discord/api")
       .attr("width", data.length)
       .attr("height", 300);
 
-    var circles = svg.selectAll("circle").data(data);
+    var rectangles = svg.selectAll("rect").data(data);
 
-    circles
+    rectangles
       .enter()
       .append("rect")
       .attr("x", (d, idx) => {
