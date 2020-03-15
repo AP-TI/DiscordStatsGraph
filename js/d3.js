@@ -15,7 +15,8 @@ d3.json("https://apti.be/discord/api")
 
     const firstField = data[0];
     const height = firstField.aantal * baseMultiplier * translateMultiplier * 1.25;
-    const width = dataLength * baseMultiplier * translateMultiplier;
+    const width = dataLength * baseMultiplier;
+    const yRectangleFontDefault = (fontSize * 10 + fontSize);
 
     var dateFromObjectId = function (objectId) {
       return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString();
@@ -29,7 +30,11 @@ d3.json("https://apti.be/discord/api")
       else if (aantal > 10) return "rgb(0,0,204)";
       else if (aantal > 5) return "rgb(0,102,102)";
       else return "rgb(0,0,0";
-    }
+    };
+
+    var heightScaler = d3.scaleLinear()
+      .domain([0, (firstField.aantal * baseMultiplier * translateMultiplier ** 2)])
+      .range([0, height]);
 
     const svg = d3
       .select("#data-here")
@@ -46,10 +51,10 @@ d3.json("https://apti.be/discord/api")
         return idx * baseMultiplier;
       })
       .attr("y", d => {
-        return height - d.aantal * baseMultiplier - (fontSize * 10 + 10);
+        return height - heightScaler(d.aantal * baseMultiplier) - yRectangleFontDefault;
       })
       .attr("height", d => {
-        const x = d.aantal * baseMultiplier;
+        const x = heightScaler(d.aantal * baseMultiplier);
         return x <= 0 ? 0 : x;
       })
       .attr("width", () => {
@@ -60,15 +65,10 @@ d3.json("https://apti.be/discord/api")
       });
 
     const text = svg.selectAll("text").data(data);
-
     text.enter()
       .append("text")
-      .attr("x", (d, idx) => {
-        return 0;
-      })
-      .attr("y", d => {
-        return 0;
-      })
+      .attr("x", 0)
+      .attr("y", 0)
       .text(d => { return dateFromObjectId(d._id); })
       .attr("font-family", "Verdana")
       .attr("font-size", fontSize + "px")
