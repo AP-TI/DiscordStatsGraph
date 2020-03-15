@@ -10,15 +10,26 @@ d3.json("https://apti.be/discord/api")
 
     const dataLength = data.length;
     const translateMultiplier = 2;
-    const baseMultiplier = 10;
+    const baseMultiplier = 9;
+    const fontSize = 12;
 
     const firstField = data[0];
-    const height = firstField.aantal * baseMultiplier * translateMultiplier * 1.5;
+    const height = firstField.aantal * baseMultiplier * translateMultiplier * 1.25;
     const width = dataLength * baseMultiplier * translateMultiplier;
 
     var dateFromObjectId = function (objectId) {
       return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString();
     };
+
+    var colorCode = function (aantal) {
+      if (aantal > 50) return "rgb(204,0,0)";
+      else if (aantal > 40) return "rgb(204,102,0)";
+      else if (aantal > 30) return "rgb(204,204,0)";
+      else if (aantal > 20) return "rgb(102,204,0)";
+      else if (aantal > 10) return "rgb(0,0,204)";
+      else if (aantal > 5) return "rgb(0,102,102)";
+      else return "rgb(0,0,0";
+    }
 
     const svg = d3
       .select("#data-here")
@@ -35,30 +46,21 @@ d3.json("https://apti.be/discord/api")
         return idx * baseMultiplier;
       })
       .attr("y", d => {
-        return height - d.aantal * baseMultiplier - 120;
+        return height - d.aantal * baseMultiplier - (fontSize * 10 + 10);
       })
       .attr("height", d => {
         const x = d.aantal * baseMultiplier;
-
-        if (x <= 0) return 0;
-
-        return x;
+        return x <= 0 ? 0 : x;
       })
       .attr("width", () => {
         return baseMultiplier;
       })
       .attr("fill", d => {
-        if (d.aantal > 50) return "rgb(204,0,0)";
-        else if (d.aantal > 40) return "rgb(204,102,0)";
-        else if (d.aantal > 30) return "rgb(204,204,0)";
-        else if (d.aantal > 20) return "rgb(102,204,0)";
-        else if (d.aantal > 10) return "rgb(0,0,204)";
-        else if (d.aantal > 5) return "rgb(0,102,102)";
-        else return "rgb(0,0,0";
+        return colorCode(d.aantal);
       });
 
     const text = svg.selectAll("text").data(data);
-    
+
     text.enter()
       .append("text")
       .attr("x", (d, idx) => {
@@ -68,16 +70,10 @@ d3.json("https://apti.be/discord/api")
         return 0;
       })
       .text(d => { return dateFromObjectId(d._id); })
-      .attr("font-family", "sans-serif")
-      .attr("font-size", "12px")
+      .attr("font-family", "Verdana")
+      .attr("font-size", fontSize + "px")
       .attr("fill", d => {
-        if (d.aantal > 55) return "rgb(204,0,0)";
-        else if (d.aantal > 45) return "rgb(204,102,0)";
-        else if (d.aantal > 35) return "rgb(204,204,0)";
-        else if (d.aantal > 25) return "rgb(102,204,0)";
-        else if (d.aantal > 15) return "rgb(0,0,204)";
-        else if (d.aantal > 5) return "rgb(0,102,102)";
-        else return "rgb(0,0,0";
+        return colorCode(d.aantal);
       })
       .attr('transform', (d, idx) => {
         const x = idx * baseMultiplier + baseMultiplier;
