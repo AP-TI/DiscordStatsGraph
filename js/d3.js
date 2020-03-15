@@ -1,15 +1,17 @@
 d3.json("https://apti.be/discord/api")
   .then(data => {
     //data.forEach(d => d.aantal.numberInt = +d.aantal.numberInt);
+    const firstField = data[0];
+    const height = firstField.aantal * 25;
+    const multi = 4;
 
-    var svg = d3
+    const svg = d3
       .select("#data-here")
       .append("svg")
       .attr("width", data.length)
-      .attr("height", data[0].aantal*30);
-      console.log(data[0].aantal)
+      .attr("height", height);
 
-    var rectangles = svg.selectAll("rect").data(data);
+      const rectangles = svg.selectAll("rect").data(data);
 
     rectangles
       .enter()
@@ -17,11 +19,11 @@ d3.json("https://apti.be/discord/api")
       .attr("x", (d, idx) => {
         return idx;
       })
-      .attr("y", function(d, idx) {
-        return 200;
+      .attr("y", function (d, idx) {
+        return height - d.aantal * multi;
       })
-      .attr("height", function(d) {
-        var x = d.aantal *4;
+      .attr("height", function (d) {
+        const x = d.aantal * multi;
 
         if (x <= 0) return 0;
 
