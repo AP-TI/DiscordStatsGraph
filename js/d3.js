@@ -11,7 +11,7 @@ d3.json("https://apti.be/discord/api")
     const svg = d3
       .select("#data-here")
       .append("svg")
-      .attr("width", 1200)
+      .attr("width", data.length * 11)
       .attr("height", height);
 
       const rectangles = svg.selectAll("rect").data(data);
@@ -32,7 +32,7 @@ d3.json("https://apti.be/discord/api")
 
         return x;
       })
-      .attr("width", 1200 / data.length)
+      .attr("width", 10)
       .attr("transform", (d, i) => {
         return `translate(${[10 * i, 0]})`
       })
