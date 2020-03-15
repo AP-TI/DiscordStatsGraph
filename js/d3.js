@@ -6,7 +6,8 @@ d3.json("https://apti.be/discord/api")
       .select("#data-here")
       .append("svg")
       .attr("width", data.length)
-      .attr("height", 300);
+      .attr("height", data[0].aantal*30);
+      console.log(data[0].aantal)
 
     var rectangles = svg.selectAll("rect").data(data);
 
@@ -20,13 +21,13 @@ d3.json("https://apti.be/discord/api")
         return 200;
       })
       .attr("height", function(d) {
-        var x = d.aantal;
+        var x = d.aantal *4;
 
         if (x <= 0) return 0;
 
         return x;
       })
-      .attr("width", "2px")
+      .attr("width", "1px")
       .attr("fill", d => {
         if (d.aantal > 50) return "rgb(204,0,0)";
         else if (d.aantal > 40) return "rgb(204,102,0)";
