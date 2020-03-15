@@ -2,7 +2,7 @@ d3.json("https://apti.be/discord/api")
   .then(data => {
     var newData = [];
 
-    for (let i = 0; i < data.length; i += 60) {
+    for (let i = 0; i < data.length; i += 15) {
       newData.push(data[i]);
     }
 
