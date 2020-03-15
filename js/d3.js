@@ -5,7 +5,7 @@ d3.json("https://apti.be/discord/api")
     var svg = d3
       .select("#data-here")
       .append("svg")
-      .attr("width", data.aantal)
+      .attr("width", data.length)
       .attr("height", 300);
 
     var circles = svg.selectAll("circle").data(data);
