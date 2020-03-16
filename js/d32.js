@@ -1,4 +1,4 @@
-setInterval(function () {
+const loadData =  () => {
   d3.json("https://apti.be/discord/api")
     .then(data => {
       console.log("Doing a call here!")
@@ -102,4 +102,7 @@ setInterval(function () {
     .catch(error => {
       console.log(error);
     });
-}, 10000);
+}
+
+loadData()
+setInterval(loadData, 10000)
