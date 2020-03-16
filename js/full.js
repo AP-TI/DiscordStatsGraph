@@ -13,7 +13,16 @@ d3.json("https://apti.be/discord/api")
     const baseMultiplier = 9;
     const fontSize = 12;
 
-    const firstField = data[0];
+    var calculateAverage = function () {
+      let gemiddelde = 0;
+      for (const tijdstip in data) {
+        gemiddelde += data[tijdstip].aantal;
+      }
+
+      return gemiddelde / dataLength;
+    };
+
+    const firstField = { aantal: calculateAverage() };
     const height = firstField.aantal * baseMultiplier * translateMultiplier * 1.25;
     const width = dataLength * baseMultiplier;
     const yRectangleFontDefault = (fontSize * 10 + fontSize);
@@ -41,7 +50,7 @@ d3.json("https://apti.be/discord/api")
       .style("opacity", 0);
 
     const svg = d3
-      .select("#data-here")
+      .select("#full")
       .append("svg")
       .attr("width", width)
       .attr("height", height);
