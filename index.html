@@ -22,16 +22,23 @@
             border-radius: 8px;
             pointer-events: none;
         }
+
+        div.row{
+            height: auto;
+            width: 1000px;
+            border: 2px solid black;
+            overflow: scroll;
+        }
     </style>
 
     <div class="container">
+        <h1>Visuele weergave van het aantal online serverleden binnen de APTI-Discord server</h1>
         <div class="row">
-            <h1>Visuele weergave van het aantal online serverleden binnen de APTI-Discord server</h1>
             <div id="full"></div>
         </div>
         <br/>
-        <div class="row">
-            <h1>Grafiek van het laatste uur</h1>
+        <h1>Grafiek van het laatste uur</h1>
+        <div class="row2">
             <div id="hour"></div>
         </div>
     </div>

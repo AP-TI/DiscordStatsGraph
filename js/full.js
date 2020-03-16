@@ -1,5 +1,6 @@
 d3.json("https://apti.be/discord/api")
   .then(data => {
+    data.reverse();
     var newData = [];
 
     var gemiddelde = data[0];
