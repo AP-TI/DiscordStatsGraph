@@ -69,10 +69,13 @@ d3.json("https://apti.be/discord/api")
           .style("left", (d3.event.pageX) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
       })
-      .on("mouseout", function (d) {
+      .on("mouseout", () => {
         div.transition()
           .duration(100)
           .style("opacity", 0);
+      })
+      .on("click", () => {
+        alert("Todo: informatie tonen!");
       });
 
     const text = svg.selectAll("text").data(data);

@@ -62,7 +62,7 @@ const loadData = () => {
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 28) + "px");
         })
-        .on("mouseout", function (d) {
+        .on("mouseout", () => {
           div.transition()
             .duration(100)
             .style("opacity", 0);
@@ -90,5 +90,5 @@ const loadData = () => {
     });
 }
 
-loadData()
-setInterval(loadData, 10000)
+loadData();
+setInterval(loadData, 60000);
