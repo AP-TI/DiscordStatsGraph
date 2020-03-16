@@ -2,8 +2,8 @@ d3.json("https://apti.be/discord/api")
   .then(data => {
     var newData = [];
 
-    var gemiddelde = 0;
-    for (let i = 0; i < data.length; i++) {
+    var gemiddelde = data[0];
+    for (let i = 1; i < data.length; i++) {
       gemiddelde += data[i].aantal;
       if (i % 60 == 0) {
         var object = { ...data[i] };
@@ -12,8 +12,7 @@ d3.json("https://apti.be/discord/api")
         gemiddelde = 0;
       }
     }
-    console.log(data.length);
-    console.log(newData.length);
+    
     data = [...newData];
 
     const dataLength = data.length;
