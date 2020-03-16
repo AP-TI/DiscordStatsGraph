@@ -35,9 +35,9 @@ d3.json("https://apti.be/discord/api")
     var heightScaler = d3.scaleLinear()
       .domain([0, (firstField.aantal * baseMultiplier * translateMultiplier ** 2)])
       .range([0, height]);
-      
-      var div = d3.select("body").append("div")	
-      .attr("class", "tooltip")				
+
+    var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
       .style("opacity", 0);
 
     const svg = d3
@@ -74,6 +74,11 @@ d3.json("https://apti.be/discord/api")
         div.html(d.aantal + "<br/>" + dateFromObjectId(d._id))
           .style("left", (d3.event.pageX) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function (d) {
+        div.transition()
+          .duration(100)
+          .style("opacity", 0);
       });
 
     const text = svg.selectAll("text").data(data);
