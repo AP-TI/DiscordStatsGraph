@@ -77,7 +77,7 @@ const loadData = () => {
         .attr("y", 0)
         .text(d => {
           let lDate = DateFromObjectId(d._id);
-          let result = lDate.getHours().toString().padStart(2, "0") + ":" + lDate.getMinutes().toString().padStart(2, "0") + "h";;
+          let result = lDate.getHours().toString().padStart(2, "0") + "h" + lDate.getMinutes().toString().padStart(2, "0");
 
           if (!(sDate.getDay() == lDate.getDay()))
             result += " " + lDate.toLocaleDateString();
