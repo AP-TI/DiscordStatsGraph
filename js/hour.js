@@ -57,7 +57,7 @@ const loadData = () => {
           div.transition()
             .duration(200)
             .style("opacity", .9);
-          div.html(d.aantal + "<br/>" + DateFromObjectId(d._id).toLocaleString())
+          div.html("aantal: " + d.aantal + "<br/>" + DateFromObjectId(d._id).toLocaleString())
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 28) + "px");
         })
@@ -77,7 +77,7 @@ const loadData = () => {
         .attr("y", 0)
         .text(d => {
           let lDate = DateFromObjectId(d._id);
-          let result = lDate.toLocaleTimeString();
+          let result = lDate.getHours().toString().padStart(2, "0") + ":" + lDate.getMinutes().toString().padStart(2, "0") + "h";;
 
           if (!(sDate.getDay() == lDate.getDay()))
             result += " " + lDate.toLocaleDateString();
