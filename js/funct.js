@@ -1,22 +1,22 @@
-CalculateAverage = function (data) {
-    let gemiddelde = 0;
-    for (const tijdstip in data) {
-        gemiddelde += data[tijdstip].aantal;
+CalculateAverage = function (d) {
+    let avg = 0;
+    for (const t in d) {
+        avg += d[t].aantal;
     }
 
-    return gemiddelde / data.length;
+    return avg / d.length;
 };
 
-ColorCode = function (aantal) {
-    if (aantal > 50) return "rgb(204,0,0)";
-    else if (aantal > 40) return "rgb(204,102,0)";
-    else if (aantal > 30) return "rgb(204,204,0)";
-    else if (aantal > 20) return "rgb(102,204,0)";
-    else if (aantal > 10) return "rgb(0,0,204)";
-    else if (aantal > 5) return "rgb(0,102,102)";
+ColorCode = function (cnt) {
+    if (cnt > 50) return "rgb(204,0,0)";
+    else if (cnt > 40) return "rgb(204,102,0)";
+    else if (cnt > 30) return "rgb(204,204,0)";
+    else if (cnt > 20) return "rgb(102,204,0)";
+    else if (cnt > 10) return "rgb(0,0,204)";
+    else if (cnt > 5) return "rgb(0,102,102)";
     else return "rgb(0,0,0";
 };
 
-DateFromObjectId = function (objectId) {
-    return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString();
+DateFromObjectId = function (oID) {
+    return new Date(parseInt(oID.substring(0, 8), 16) * 1000);
 };

@@ -58,7 +58,7 @@ const loadData = () => {
           div.transition()
             .duration(200)
             .style("opacity", .9);
-          div.html(d.aantal + "<br/>" + DateFromObjectId(d._id))
+          div.html(d.aantal + "<br/>" + DateFromObjectId(d._id).toLocaleString())
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 28) + "px");
         })
@@ -69,11 +69,26 @@ const loadData = () => {
         });
 
       const text = svg.selectAll("text").data(data);
+      let sDate = new Date(Date.now());
+      sDate.setDate(sDate.getDate() + 1);
+      
       text.enter()
         .append("text")
         .attr("x", 0)
         .attr("y", 0)
-        .text(d => { return DateFromObjectId(d._id); })
+        .text(d => {
+          let lDate = DateFromObjectId(d._id);
+          let result = lDate.toLocaleTimeString();
+
+          if (!(sDate.getDay() == lDate.getDay())) {
+            result += " " + lDate.toLocaleDateString();
+          }
+
+
+          sDate = lDate;
+          console.log(result);
+          return result;
+        })
         .attr("font-family", "Verdana")
         .attr("font-size", fontSize + "px")
         .attr("fill", d => {
