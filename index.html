@@ -23,18 +23,18 @@
             pointer-events: none;
         }
 
-        div.row{
+        div.row {
             height: auto;
             width: 1100px;
             border: 2px solid black;
             overflow: scroll;
         }
 
-        svg{
+        svg {
             margin: 10px;
         }
-        
-        div.row2{
+
+        div.row2 {
             height: auto;
             width: 560px;
             border: 2px solid black;
@@ -42,13 +42,14 @@
     </style>
 
     <div class="container">
-        <h1>Visuele weergave van het aantal online serverleden binnen de <img src="./assets/apti.svg" alt="APTI"/>-Discord server</h1>
-        <div class="row">
+        <h1>Visuele weergave van het aantal online serverleden binnen de <img src="./assets/apti.svg"
+                alt="APTI" />-Discord server</h1>
+        <div id="row" class="row">
             <div id="full"></div>
         </div>
-        <br/>
+        <br />
         <h1>Grafiek van het laatste uur</h1>
-        <div class="row2">
+        <div id="row2" class="row2">
             <div id="hour"></div>
         </div>
     </div>

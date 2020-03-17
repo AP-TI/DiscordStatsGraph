@@ -1,6 +1,5 @@
 d3.json("https://apti.be/discord/api")
   .then(d => {
-    d.reverse();
     const nData = [];
 
     let sAverage = d[0];
@@ -107,6 +106,10 @@ d3.json("https://apti.be/discord/api")
         const y = h;
         return 'translate( ' + x + ' , ' + y + '),' + 'rotate(-90)';
       });
+      
+      var myDiv = document.getElementById("row");
+      console.log(myDiv);
+      myDiv.scrollLeft = myDiv.scrollWidth;
   })
   .catch(error => {
     console.log(error);
