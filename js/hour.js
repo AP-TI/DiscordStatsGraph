@@ -1,55 +1,54 @@
 const loadData = () => {
   d3.json("https://apti.be/discord/api")
-    .then(data => {
-      console.log("Doing a call here!")
-      data = data.splice(Math.max(data.length - 60, 1));
+    .then(d => {
+      console.log("Doing a call here!");
+      d = d.splice(Math.max(d.length - 60, 1));
 
-      const dataLength = data.length;
-      const translateMultiplier = 2;
-      const baseMultiplier = 9;
+      const dLength = d.length;
+      const transMulti = 2;
+      const baseMulti = 9;
       const fontSize = 12;
 
-      const firstField = { aantal: CalculateAverage(data) };
-      const height = firstField.aantal * baseMultiplier;
-      const width = dataLength * baseMultiplier;
-      const yRectangleFontDefault = (fontSize * 10 + fontSize);
+      const averageField = { aantal: CalculateAverage(d) };
+      const h = averageField.aantal * baseMulti;
+      const w = dLength * baseMulti;
+      const fontDef = (fontSize * 10 + fontSize);
 
-      var heightScaler = d3.scaleLinear()
-        .domain([0, (firstField.aantal * baseMultiplier * translateMultiplier ** 2)])
-        .range([0, height]);
+      var hScalar = d3.scaleLinear()
+        .domain([0, (averageField.aantal * baseMulti * transMulti ** 2)])
+        .range([0, h]);
 
       var div = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-      d3
-        .select("#hour")
+      d3.select("#hour")
         .select("svg")
         .remove();
 
       const svg = d3
         .select("#hour")
         .append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", w)
+        .attr("height", h);
 
-      const rectangles = svg.selectAll("rect").data(data);
+      const rects = svg.selectAll("rect").data(d);
 
-      rectangles
+      rects
         .enter()
         .append("rect")
         .attr("x", (d, idx) => {
-          return idx * baseMultiplier;
+          return idx * baseMulti;
         })
         .attr("y", d => {
-          return height - heightScaler(d.aantal * baseMultiplier) - yRectangleFontDefault;
+          return h - hScalar(d.aantal * baseMulti) - fontDef;
         })
         .attr("height", d => {
-          const x = heightScaler(d.aantal * baseMultiplier);
+          const x = hScalar(d.aantal * baseMulti);
           return x <= 0 ? 0 : x;
         })
         .attr("width", () => {
-          return baseMultiplier;
+          return baseMulti;
         })
         .attr("fill", d => {
           return ColorCode(d.aantal);
@@ -68,10 +67,10 @@ const loadData = () => {
             .style("opacity", 0);
         });
 
-      const text = svg.selectAll("text").data(data);
+      const text = svg.selectAll("text").data(d);
       let sDate = new Date(Date.now());
       sDate.setDate(sDate.getDate() + 1);
-      
+
       text.enter()
         .append("text")
         .attr("x", 0)
@@ -80,13 +79,10 @@ const loadData = () => {
           let lDate = DateFromObjectId(d._id);
           let result = lDate.toLocaleTimeString();
 
-          if (!(sDate.getDay() == lDate.getDay())) {
+          if (!(sDate.getDay() == lDate.getDay()))
             result += " " + lDate.toLocaleDateString();
-          }
-
 
           sDate = lDate;
-          console.log(result);
           return result;
         })
         .attr("font-family", "Verdana")
@@ -95,8 +91,8 @@ const loadData = () => {
           return ColorCode(d.aantal);
         })
         .attr('transform', (d, idx) => {
-          const x = idx * baseMultiplier + baseMultiplier;
-          const y = height;
+          const x = idx * baseMulti + baseMulti;
+          const y = h;
           return 'translate( ' + x + ' , ' + y + '),' + 'rotate(-90)';
         });
     })

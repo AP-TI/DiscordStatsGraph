@@ -91,13 +91,10 @@ d3.json("https://apti.be/discord/api")
         let lDate = DateFromObjectId(d._id);
         let result = lDate.toLocaleTimeString();
 
-        if (!(sDate.getDay() == lDate.getDay())) {
+        if (!(sDate.getDay() == lDate.getDay()))
           result += " " + lDate.toLocaleDateString();
-        }
-
 
         sDate = lDate;
-        console.log(result);
         return result;
       })
       .attr("font-family", "Verdana")
