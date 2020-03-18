@@ -10,8 +10,8 @@ const loadData = () => {
       const fontSize = 12;
 
       const calculateMax = CalculateMax(d);
-
-      const averageField = { aantal: calculateMax > 20 ? calculateMax : calculateMax + 20 };
+      const calculateAverage = CalculateAverage(d);
+      const averageField = { aantal: calculateMax > 35 ? calculateAverage : calculateAverage + 20 };
       const h = averageField.aantal * baseMulti;
       const w = dLength * baseMulti;
       const fontDef = (fontSize * 10 + fontSize);

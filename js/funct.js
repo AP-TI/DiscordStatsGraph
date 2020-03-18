@@ -10,7 +10,8 @@ CalculateAverage = function (d) {
 CalculateMax = function (d) {
     let max = 0;
     for (const t in d) {
-        if (t > max) max= d[t].aantal;
+        let temp = d[t].aantal;
+        if (temp > max) max= temp;
     }
 
     return max;

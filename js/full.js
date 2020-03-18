@@ -20,8 +20,9 @@ d3.json("https://apti.be/discord/api")
     const baseMulti = 9;
     const fontSize = 12;
 
+    const calculateMax = CalculateMax(d);
     const calculateAverage = CalculateAverage(d);
-    const averageField = { aantal: calculateAverage > 20 ? calculateAverage : calculateAverage + 20 };
+    const averageField = { aantal: calculateMax > 50 ? calculateAverage : calculateMax + 20 };
     const h = averageField.aantal * baseMulti * transMulti * 1.25;
     const w = dLength * baseMulti;
     const fontDef = (fontSize * 10 + fontSize);
