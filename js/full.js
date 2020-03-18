@@ -20,7 +20,8 @@ d3.json("https://apti.be/discord/api")
     const baseMulti = 9;
     const fontSize = 12;
 
-    const averageField = { aantal: CalculateAverage(d) };
+    const calculateAverage = CalculateAverage(d);
+    const averageField = { aantal: calculateAverage > 20 ? calculateAverage : calculateAverage + 20 };
     const h = averageField.aantal * baseMulti * transMulti * 1.25;
     const w = dLength * baseMulti;
     const fontDef = (fontSize * 10 + fontSize);
@@ -106,10 +107,9 @@ d3.json("https://apti.be/discord/api")
         const y = h;
         return 'translate( ' + x + ' , ' + y + '),' + 'rotate(-90)';
       });
-      
-      var myDiv = document.getElementById("row");
-      console.log(myDiv);
-      myDiv.scrollLeft = myDiv.scrollWidth;
+
+    var myDiv = document.getElementById("row");
+    myDiv.scrollLeft = myDiv.scrollWidth;
   })
   .catch(error => {
     console.log(error);

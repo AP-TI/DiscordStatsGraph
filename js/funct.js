@@ -7,6 +7,15 @@ CalculateAverage = function (d) {
     return avg / d.length;
 };
 
+CalculateMax = function (d) {
+    let max = 0;
+    for (const t in d) {
+        if (t > max) max= d[t].aantal;
+    }
+
+    return max;
+};
+
 ColorCode = function (cnt) {
     if (cnt > 50) return "rgb(204,0,0)";
     else if (cnt > 40) return "rgb(204,102,0)";
