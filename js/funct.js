@@ -25,9 +25,9 @@ ColorCode = function (cnt) {
     // else if (cnt > 10) return "rgb(0,0,204)";
     // else if (cnt > 5) return "rgb(0,102,102)";
     // else return "rgb(0,0,0";
-    let r = Math.floor(255 / cnt);
-    let g = Math.floor(255 / cnt);
-    let b = Math.floor(255 / cnt);
+    let r = Math.floor(255 / cnt * Math.random() * 10);
+    let g = Math.floor(255 / cnt * Math.random() * 10);
+    let b = Math.floor(255 / cnt * Math.random() * 10);
     return "rgb(" + r + ", " + g + ", " + b + ") ";
 };
 
